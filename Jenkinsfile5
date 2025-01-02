@@ -1,0 +1,21 @@
+pipeline {
+    agent { label 'dev' }
+    stages {
+    stage('checkout') {
+          steps {
+              sh " rm -rf hello-world-war "
+              sh "git clone https://github.com/hhgsharish/hello-world-war.git"
+            }
+        }
+        stage('build') {
+          steps {
+              sh "mvn clean package"
+            }
+        }
+         stage('deploy') {
+          steps {
+               sh 'sudo scp /opt/jenkins/workspace/assign_pipeline/target/hello-world-war-1.0.0.war root@172.31.13.101:/opt/tomcat/webapps/'
+            }
+        }
+    }
+}
