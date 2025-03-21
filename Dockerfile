@@ -1,6 +1,6 @@
 # Stage 1: Build the Java application
 FROM maven:3.8.2-openjdk-8 AS builder
-WORKDIR /build
+WORKDIR /app
 COPY . .
 RUN mvn clean package
 RUN ls target/
