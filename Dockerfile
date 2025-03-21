@@ -6,5 +6,8 @@ RUN mvn clean package
 RUN ls target/
 # Stage 2: Deploy to Tomcat
 FROM tomcat:jre8-temurin-focal AS deploy
-COPY --from=builder /app/target/HelloWorld.war /usr/local/tomcat/webapps/
+COPY --from=builder /app/target/hello-world-war*.war /usr/local/tomcat/webapps/
 
+# Expose Tomcat's default port
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
