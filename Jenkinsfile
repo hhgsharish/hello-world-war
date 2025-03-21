@@ -12,12 +12,6 @@ pipeline {
             }
         }
 
-        stage('Build Application') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $DOCKER_IMAGE .'
